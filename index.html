@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang = "ru">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="styles/bootstrap.min.css">
+        <link rel="stylesheet" href="styles/style.css">
+        <script src="scripts/jquery.js"></script>
+        <script src="scripts/script.js"></script>
+    </head>
+    <body>
+        <header class="container-fluid">
+            <div class="container p-3">
+                <div class="row logo pt-3 pb-3">
+                    <img id="logo" src="images/logo-gray.png">
+                    <h2>Post-Tracker</h2>
+                </div>
+                <div class="row pt-3 pb-3">
+                    <h1>Отслеживание почтовых отправлений</h1>
+                    <h5>Отследи посылку Почты России, Украины, Беларуси, Казахстана, Китая, Гонконга, AliExpress, JD.com, Joom, Pandao, GearBest, Ebay.com, TaoBao</h5>
+                </div>
+                <div class="row pt-3 pb-3">
+                    <div class="col-sm m-0 p-0">
+                        <form id="form-data" action="javascript:void(0)" class="card card-sm xs">
+                            <div class="input-group input-group-lg card-body row no-gutters align-items-center">
+                                <input type="text" class="form-control" name="track" placeholder="Введите трек-код посылки...">
+                                <span class="input-group-btn pl-3">
+                                    <button class="btn btn-lg" type="submit">Найти</button>
+                                </span>
+                            </div>
+                        </form>
+                        <h6 class="pt-3">Пример: SA089126407EE LM802805966CN</h6>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div id="output">
+              
+            </div>
+            <div class="row">
+                
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="container pt-5">
+                <div class="row text-center text-xs-center text-sm-left text-md-left">
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto">
+                        <h5><img id="logo" src="images/logo-yellow.png">Post-Tracker</h5>
+                        <p>Сайт разработан на основании задания дипломного проекта</p>
+                    </div>
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto">
+                        <h5>Полезные ссылки</h5>
+                        <p><a href="#">API</a></p>
+                        <p><a href="#">Bootstrap</a></p>
+                    </div>
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto">
+                        <h5>Контакты</h5>
+                        <p>Харьков</p>
+                        <p>a.vardanyn@student.csn.khai.edu</p>
+                        <p>+38 (050) 990 51 44</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+                        <div class="footer-copyright text-center py-3">© 2020 Copyright: Арсен Варданян</div>
+                    </div>
+                    </hr>
+                </div>	
+            </div>
+        </footer>
+    </body>
+</html>
