@@ -1,72 +1,245 @@
 <!DOCTYPE html>
-<html lang = "ru">
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="styles/bootstrap.min.css">
-        <link rel="stylesheet" href="styles/style.css">
-        <script src="scripts/jquery.js"></script>
-        <script src="scripts/script.js"></script>
-    </head>
-    <body>
-        <header class="container-fluid">
-            <div class="container p-3">
-                <div class="row logo pt-3 pb-3">
-                    <img id="logo" src="images/logo-gray.png">
-                    <h2>Post-Tracker</h2>
-                </div>
-                <div class="row pt-3 pb-3">
-                    <h1>Отслеживание почтовых отправлений</h1>
-                    <h5>Отследи посылку Почты России, Украины, Беларуси, Казахстана, Китая, Гонконга, AliExpress, JD.com, Joom, Pandao, GearBest, Ebay.com, TaoBao</h5>
-                </div>
-                <div class="row pt-3 pb-3">
-                    <div class="col-sm m-0 p-0">
-                        <form id="form-data" action="javascript:void(0)" class="card card-sm xs">
-                            <div class="input-group input-group-lg card-body row no-gutters align-items-center">
-                                <input type="text" class="form-control" name="track" placeholder="Введите трек-код посылки...">
-                                <span class="input-group-btn pl-3">
-                                    <button class="btn btn-lg" type="submit">Найти</button>
-                                </span>
-                            </div>
-                        </form>
-                        <h6 class="pt-3">Пример: SA089126407EE LM802805966CN</h6>
-                    </div>
+<html lang="ru">
+
+<head>
+    <title>Post-Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="images/logo-yellow.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/script.js"></script>
+</head>
+
+<body>
+    <header class="container-fluid">
+        <div class="container p-3">
+            <div class="row logo pt-3 pb-3">
+                <a href=""><img id="logo" src="images/logo-gray.png"></a>
+                <h2>Post-Tracker</h2>
+            </div>
+            <div class="row pt-3 pb-3">
+                <h1>Отслеживание почтовых отправлений</h1>
+                <h5>Отследи посылку Почты России, Украины, Беларуси, Казахстана, Китая, Гонконга, AliExpress, JD.com,
+                    Joom, Pandao, GearBest, Ebay.com, TaoBao</h5>
+            </div>
+            <div class="row pt-3 pb-3">
+                <div class="col-sm m-0 p-0">
+                    <form id="form-data" action="javascript:void(0)" class="card card-sm xs">
+                        <div class="input-group input-group-lg card-body row no-gutters align-items-center">
+                            <input type="text" class="form-control" name="code"
+                                placeholder="Введите трек-код посылки...">
+                            <span class="input-group-btn pl-3">
+                                <button class="btn btn-lg" type="submit">Найти</button>
+                            </span>
+                        </div>
+                        <input type="hidden" name="apiKey" value="write you api key">
+                        <input type="hidden" name="domain" value="demo.track24.ru">
+                        <input type="hidden" name="pretty" value="true">
+                        <input type="hidden" name="lng" value="ru">
+                        <input type="hidden" name="selectedService" value="uapost">
+                    </form>
+                    <h6 class="pt-3">Пример: SA089126407EE LM802805966CN</h6>
                 </div>
             </div>
-        </header>
-        <main>
-            <div id="output">
-              
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div id="track-information" class="row"></div>
+            <div class="row pt-5 pb-5">
+                <h2 class="w-100 text-center">Что такое почтовый идентификатор или трек-код?</h2>
+                <div class="w-100 text-center p-5">
+                    Трек-код, по другому почтовый идентификатор или номер отслеживания — это уникальный код, который
+                    выдается отправителю посылки и позволяет следить за передвижением своего почтового отправления по
+                    стране или всему миру.
+                </div>
+                <div class="col-12 col-md-6">
+                    <p><strong>Международный трек-код</strong> — формат почтового идентификатора утвержденный Всемирным
+                        почтовым союзом, и позволяющий следить за посылкой <b>по всему миру</b>.
+                        <br>Выдается обычно при отправке посылки из одной страны в другую.
+                    </p>
+                    <p>Всегда состоит из двух латинских символов в начале, которые определяют тип посылки.
+                        <br>Далее девять цифр определяющие номер почтового отправления и в конце две латинские буквы,
+                        указывающие на страну отправителя.
+                    </p>
+                </div>
+                <div class="col-12 col-md-6">
+                    <p><strong>Трек-код транспортной, курьерской или логистической компании</strong> может представлять
+                        из себя любой набор букв и цифр, и соответствует лишь внутренним стандартам каждой отдельно
+                        взятой почтовой компании.</p>
+                    <p>Например <b>LP00043154048458, SYBMY09206934, XRU1234567812, 82345679</b> и так далее. </p>
+                    <p>Как правило, такие треки не отслеживаются на всем пути. Как только посылка покинет страну
+                        отправителя - ее отслеживание прекратится.</p>
+                    <p>После экспорта в Вашу страну и прохождения таможни, Ваша посылка получит неотслеживаемый номер.
+                    </p>
+                </div>
+                <div class="w-100"></div>
+                <h2 class="w-100 text-center p-5">Самые популярные почтовые службы</h2>
+                <div id="services" class="row p-3">
+                    <div class="col-12 col-md-4">
+                        <div class="row m-0 flex-fix flex-nowrap">
+                            <img src="images/services/deutsche-post.png">
+                            <div class="block-popular-text">
+                                <h5>Почта Германии</h5>
+                                <p>Национальная почтовая служба</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="row m-0 flex-fix flex-nowrap">
+                            <img src="images/services/russian-post.png">
+                            <div class="block-popular-text">
+                                <h5>Почта России</h5>
+                                <p>Федеральный почтовый оператор РФ</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="row m-0 flex-fix flex-nowrap">
+                            <img src="images/services/cainiao.png">
+                            <div class="block-popular-text">
+                                <h5>CAINIAO</h5>
+                                <p>Отслеживание Aliexpress</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="row m-0 flex-fix flex-nowrap">
+                            <img src="images/services/4px-express.png">
+                            <div class="block-popular-text">
+                                <h5>4PX Express</h5>
+                                <p>Китайская логистическая компания</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="row m-0 flex-fix flex-nowrap">
+                            <img src="images/services/china-post.png">
+                            <div class="block-popular-text">
+                                <h5>China Post</h5>
+                                <p>Национальная почтовая служба Китая</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="row m-0 flex-fix flex-nowrap">
+                            <img src="images/services/cdek.png">
+                            <div class="block-popular-text">
+                                <h5>СДЭК</h5>
+                                <p>Логистические решения. Служба доставки</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="row m-0 flex-fix flex-nowrap">
+                            <img src="images/services/ukrposhta.png">
+                            <div class="block-popular-text">
+                                <h5>УкрПочта</h5>
+                                <p>Национальная почтовая служба Украины</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="row m-0 flex-fix flex-nowrap">
+                            <img src="images/services/belpost.png">
+                            <div class="block-popular-text">
+                                <h5>БелПочта</h5>
+                                <p>Национальная почтовая служба Республики Беларусь</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="row m-0 flex-fix flex-nowrap">
+                            <img src="images/services/posti.png">
+                            <div class="block-popular-text">
+                                <h5>Почта Финляндии</h5>
+                                <p>Национальная почтовая служба Финляндии</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="row m-0 flex-fix flex-nowrap">
+                            <img src="images/services/kazpost.png">
+                            <div class="block-popular-text">
+                                <h5>Казпочта</h5>
+                                <p>Национальная почтовая служба Казахстана</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="row m-0 flex-fix flex-nowrap">
+                            <img src="images/services/usps.png">
+                            <div class="block-popular-text">
+                                <h5>Почта США</h5>
+                                <p>Национальный почтовый оператор</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="row m-0 flex-fix flex-nowrap">
+                            <img src="images/services/dhl-germany.png">
+                            <div class="block-popular-text">
+                                <h5>DHL DE</h5>
+                                <p>Международная курьерская служба</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="w-100 text-center p-5">Часто задаваемые вопросы</h2>
+                <div class="col-12 col-md-6">
+                    <p><strong>Как долго ждать посылку из Китая?</strong><br>
+                        Как это ни странно, но сейчас посылки из Китая приходят гораздо быстрее, чем например в 2013
+                        году.
+                        В среднем, время доставки посылки почтой России занимает около 3 недель.
+                        Отслеживание почтовых отправлений становится возможным через 1-3 дня после отправки вашего
+                        заказа, и внесения идентификатора в почтовые системы.
+                        У нас осуществляется автоматический треккинг посылок, и в случае изменения статуса посылки мы
+                        уведомим Вас на email или sms сообщением.
+                    </p>
+                </div>
+                <div class="col-12 col-md-6">
+                    <p><strong>Что делать, если посылка не отслеживается или идет слишком долго?</strong><br>
+                        Вы сделали первый заказ на aliexpress или ebay и с нетерпением ждете, когда же продавец отправит
+                        Ваш заказ.
+                        Как правило, информация о трек-коде начинает обновляться через 7-10 дней после получения
+                        трек-кода, или через 1-2 дня после (реальной) передачи посылки в почтовое отделение.
+                        Небольшие магазины выдают трек-код сразу, но относят заказ на почту тогда, когда соберется
+                        определенное количество посылок, это может быть 1 раз в 7-14 дней.
+                        У магазинов побольше, передача посылок почте происходит чаще, и соответственно первая информация
+                        по трек-кодам таких магазинов появляется раньше.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container pt-5">
+            <div class="row text-center text-xs-center text-sm-left text-md-left">
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto">
+                    <h5><a href=""><img id="logo" src="images/logo-yellow.png"></a>Post-Tracker</h5>
+                    <p>Сайт разработан на основании задания дипломного проекта</p>
+                </div>
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto">
+                    <h5>Использованные сервисы</h5>
+                    <p><a href="https://track24.ru/?page=api#apiDescription">API</a></p>
+                    <p><a href="https://getbootstrap.com/">Bootstrap</a></p>
+                </div>
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto">
+                    <h5>Контакты</h5>
+                    <p>Харьков</p>
+                    <p>a.vardanyn@student.csn.khai.edu</p>
+                    <p>+38 (050) 990 51 44</p>
+                </div>
             </div>
             <div class="row">
-                
-            </div>
-        </main>
-        <footer class="footer">
-            <div class="container pt-5">
-                <div class="row text-center text-xs-center text-sm-left text-md-left">
-                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto">
-                        <h5><img id="logo" src="images/logo-yellow.png">Post-Tracker</h5>
-                        <p>Сайт разработан на основании задания дипломного проекта</p>
-                    </div>
-                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto">
-                        <h5>Полезные ссылки</h5>
-                        <p><a href="#">API</a></p>
-                        <p><a href="#">Bootstrap</a></p>
-                    </div>
-                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto">
-                        <h5>Контакты</h5>
-                        <p>Харьков</p>
-                        <p>a.vardanyn@student.csn.khai.edu</p>
-                        <p>+38 (050) 990 51 44</p>
-                    </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+                    <div class="footer-copyright text-center py-3">© 2020 Copyright: Арсен Варданян</div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
-                        <div class="footer-copyright text-center py-3">© 2020 Copyright: Арсен Варданян</div>
-                    </div>
-                    </hr>
-                </div>	
+                </hr>
             </div>
-        </footer>
-    </body>
+        </div>
+    </footer>
+</body>
+
 </html>
