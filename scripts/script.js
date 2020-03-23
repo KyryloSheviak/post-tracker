@@ -52,6 +52,7 @@ $(document).ready(function(e){
                             </div>
                         </div>
                         `);
+                        
                     // Общая информация
                     $("#code").text($('input[name="code"]').val());
                     $("#fromCountry").text(data.data.fromCountry);
@@ -61,18 +62,34 @@ $(document).ready(function(e){
                     $.each(data.data.groupedCompanyNames, function(index, value){
                         $("#groupedCompanyNames").append(value + "<br>");
                     });
-                    // Транзит
-                    $.each(data.data.events, function(index, value){
-                        let tmp = value.operationDateTime.split(' ');
-                        $("#events").prepend(`
-                            <div class="tracking-item">
-                                <p></p>
-                                <div class="tracking-date">${tmp[0]}<span>${tmp[1]}</span></div>
-                                <div class="float-right">${value.serviceName}</div>
-                                <div class="tracking-content">${value.operationAttributeTranslated.toUpperCase()}<span>${value.operationPlaceNameTranslated.toUpperCase()}</span></div>
-                            </div>
-                        `);
-                    });
+
+                    // Транзит // вывод первого и проверка последующих на повторы
+                    let pre = data.data.events[0];
+                    let tmp = pre.operationDateTime.split(' ');
+                    $("#events").prepend(`
+                        <div class="tracking-item">
+                            <p></p>
+                            <div class="tracking-date">${tmp[0]}<span>${tmp[1]}</span></div>
+                            <div class="float-right">${pre.serviceName}</div>
+                            <div class="tracking-content">${pre.operationAttributeTranslated.toUpperCase()}<span>${pre.operationPlaceNameTranslated.toUpperCase()}</span></div>
+                        </div>
+                    `);
+
+                    for (let index = 1; index < data.data.events.length; index++) {
+                        let element = data.data.events[index];
+                        if( pre.operationAttributeTranslated.toUpperCase() != element.operationAttributeTranslated.toUpperCase() ) {
+                            let tmp = element.operationDateTime.split(' ');
+                            $("#events").prepend(`
+                                <div class="tracking-item">
+                                    <p></p>
+                                    <div class="tracking-date">${tmp[0]}<span>${tmp[1]}</span></div>
+                                    <div class="float-right">${element.serviceName}</div>
+                                    <div class="tracking-content">${element.operationAttributeTranslated.toUpperCase()}<span>${element.operationPlaceNameTranslated.toUpperCase()}</span></div>
+                                </div>
+                            `);
+                            pre = element;
+                        }
+                    }
                 } else {
                     $("#track-information").empty();
                     $("#track-information").html(`
